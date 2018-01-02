@@ -18,7 +18,7 @@ function buildSchema($modelDB,$pass_secret){
 			for($i = 0 ; $i < count($value) ; $i++)
 				buildInsert($modelDB["dbname"],$key,$value[$i]);
 		}
-		echo json_encode(array("result" => array("content" => "Se reestablecido la Base de Datos", "date" => date('Y-m-d H:i:s')))) . "\n";
+		echo json_encode(array("result" => array("content" => "Se ha reestablecido la Base de Datos", "date" => date('Y-m-d H:i:s')))) . "\n";
 	}
 	else{
 		echo json_encode(array("error" => array("content" => "La clave secreta no es valida", "date" => date('Y-m-d H:i:s')))) . "\n";

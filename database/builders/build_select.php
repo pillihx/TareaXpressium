@@ -12,7 +12,7 @@ function buildSelect($db_name,$table_name,$columns,$where_select){
 	}
 	if($where_select != "*"){//GET 
 		//INTERMEDIATE
-		$query_select .= " FROM $db_name.$table_name WHERE ";
+		$query_select .= " FROM $table_name WHERE ";
 		//FILL VALUES WHERE
 		end($where_select);
 		$last_key = key($where_select);
@@ -25,7 +25,7 @@ function buildSelect($db_name,$table_name,$columns,$where_select){
 	}
 	else{//GET ALL SELECT
 		//INTERMEDIATE
-		$query_select .= " FROM $db_name.$table_name";
+		$query_select .= " FROM $table_name";
 		executeQuery("USE $db_name");
 		return executeQuery($query_select,"*");
 	}

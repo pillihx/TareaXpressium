@@ -27,8 +27,14 @@ function buildCreate($type_create,$object_create){
 	}
 	if($type_create == "COLUMN"){
 		executeQuery("USE $object_create[0]");
-		$column = executeQuery("SELECT $object_create[2] FROM $object_create[1]"); //VERIFY IF COLUMN EXIST
-		if (!$column)
+
+		if($object_create[2] == "FOREIGN") //EN EL CASO QUE SE AGREGUE UNA LLAVE FORANEA
 			executeQuery("ALTER TABLE $object_create[1] ADD $object_create[2] $object_create[3]"); //IF NOT EXISTS THAT CREATE
+
+		else{
+			$column = executeQuery("SELECT $object_create[2] FROM $object_create[1]"); //VERIFY IF COLUMN EXIST
+			if (!$column)
+				executeQuery("ALTER TABLE $object_create[1] ADD $object_create[2] $object_create[3]"); //IF NOT EXISTS THAT CREATE
+		}	
 	}
 }

@@ -12,6 +12,8 @@ function callDB(requestDB,success=undefined,beforeSend=undefined){
 		console.log("error", xhr);
 	});
 };
+/******** EXAMPLES CALLS *********/
+
 /*
 callDB({type_request:"insert",db_name:"reuso_control",table_name:"users",object_insert:{
 	username : "jmiranda",

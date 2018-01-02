@@ -102,9 +102,13 @@ function create_table(object_rows,title,columns_hidden,id_row,array_callback_to_
 
             var tr = add_element_html("TR",undefined,undefined,"tr_for_inputs",undefined,tbody);//TD VACIO YA QUE ES EL TD QUE VA DEBAJO DE # (COLUMNA NUMERACION)
             var td = add_element_html("TD","dropdown",undefined,undefined,undefined,tr);
+
             //SE AGREGA EL BOTON PARA AGREGAR O QUITAR NUESVAS COLUMNAS
+            /*
             var button_columns = add_element_html("BUTTON","btn btn-danger btn-fill dropdown-toggle",undefined,undefined,undefined,td);
             button_columns.setAttribute("data-toggle","dropdown");
+            button_columns.setAttribute("aria-expanded","false");
+
             add_element_html("I","fa fa-arrow-circle-down",undefined,undefined,undefined,button_columns);
 
             var div_content_all_columns = add_element_html("DIV","dropdown-menu row","margin-left:5px;box-shadow: 10px 10px 5px #888888;background-color:#EDEDED;width:"+String(Math.ceil(element_head_length/9) * 200)+"px;",undefined,undefined,td);
@@ -137,7 +141,7 @@ function create_table(object_rows,title,columns_hidden,id_row,array_callback_to_
                 }
                 father_table.innerHTML = "";
                 create_table(object_rows,title,columns_hidden_with_checked,id_row,array_callback_to_action,father_table,columns_filter_boolean);
-            };
+            };*/
 
             for(var i=0; i < element_head_length; i++){
                 if(!columns_hidden.includes(element_head[i])){//SE EVITA
@@ -203,9 +207,9 @@ function fill_body_table(object_rows,object_coincidences,table,array_callback_to
             if(!columns_hidden.includes(element_head[j]))
                 //AGREGAMOS EL ELEMENTO
                 if(object_rows[i][element_head[j]] != null)
-                    add_element_html("TD",undefined,"font-size:100%;",undefined,((object_rows[i][element_head[j]])).replace(/  +/g, ' '),tr);
+                    add_element_html("TD",undefined,"font-size:100%;","td-"+element_head[j],((object_rows[i][element_head[j]])).replace(/  +/g, ' '),tr);
                 else
-                    add_element_html("TD",undefined,"font-size:100%;",undefined,"-",tr);
+                    add_element_html("TD",undefined,"font-size:100%;","td-"+element_head[j],"-",tr);
         }
         if(array_callback_to_action.length != 0){
             //AQUI IRAN LOS BOTONES DE ACCION PARA CADA FILA DE LA TABLA
@@ -288,6 +292,27 @@ function confirmAlert(confirmTitle,confirmText,functionYES=undefined, functionNO
     });
 }
 //FUNCIONES GENERICAS
+function recognizeTypeColumnTables(modelDB){
+    var modelDB_for_view = {};
+
+    $.each(modelDB.tables, function(table,table_value){
+        modelDB_for_view[table] = {};
+        $.each(table_value, function(column,column_value){
+            if(column != "id" && column != "FOREIGN"){
+                var datatype_dbms = column_value.split(" ")[0];
+                if(datatype_dbms == "INT")
+                    modelDB_for_view[table][column] = "number";
+                if(datatype_dbms == "DATE")
+                    modelDB_for_view[table][column] = "date";
+                if (datatype_dbms.match(/VARCHAR.*/)){
+                    modelDB_for_view[table][column] = "text";
+                }
+            } 
+        });
+    });
+
+    return modelDB_for_view;
+}
 function getCurrentDate(){
     var today = new Date();
     var dd = today.getDate();
@@ -365,7 +390,7 @@ function resetBD(){
     callDB(
         {
             type_request : 'schema',
-            modelDB : reuso_control_model,
+            modelDB : task_xpressium,
             pass_secret : pass_secret
         },function(response){
             var result = buildResponse(response);

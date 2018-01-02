@@ -1,8 +1,8 @@
 <?php
 
-$username = "reusocl_control";
-$pass = "reuso_control";
-$server = "201.148.104.36";
+$username = "root";
+$pass = "";
+$server = "localhost";
 
 
 $_SERVER["con_mysqli"] = mysqli_connect($server,$username,$pass);
