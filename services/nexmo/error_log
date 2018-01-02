@@ -1,0 +1,12 @@
+[18-Dec-2017 19:14:17 AMERICA/SANTIAGO] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'missing expected key `from`' in /home/reusocl/public_html/reuso_control/services/composerphpslim/vendor/nexmo/client/src/Message/Client.php:278
+Stack trace:
+#0 /home/reusocl/public_html/reuso_control/services/composerphpslim/vendor/nexmo/client/src/Message/Client.php(34): Nexmo\Message\Client->createMessageFromArray(Array)
+#1 /home/reusocl/public_html/reuso_control/services/nexmo/send_message.php(15): Nexmo\Message\Client->send(Array)
+#2 {main}
+  thrown in /home/reusocl/public_html/reuso_control/services/composerphpslim/vendor/nexmo/client/src/Message/Client.php on line 278
+[18-Dec-2017 19:15:02 AMERICA/SANTIAGO] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'missing expected key `from`' in /home/reusocl/public_html/reuso_control/services/composerphpslim/vendor/nexmo/client/src/Message/Client.php:278
+Stack trace:
+#0 /home/reusocl/public_html/reuso_control/services/composerphpslim/vendor/nexmo/client/src/Message/Client.php(34): Nexmo\Message\Client->createMessageFromArray(Array)
+#1 /home/reusocl/public_html/reuso_control/services/nexmo/send_message.php(15): Nexmo\Message\Client->send(Array)
+#2 {main}
+  thrown in /home/reusocl/public_html/reuso_control/services/composerphpslim/vendor/nexmo/client/src/Message/Client.php on line 278
